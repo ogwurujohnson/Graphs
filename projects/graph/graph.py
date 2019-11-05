@@ -11,7 +11,7 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        pass  # TODO
+        self.vertices[vertex] = set()
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
@@ -71,20 +71,31 @@ class Graph:
                 # then add all of it's neighbors to the top of the stack
                 for next_vertex in self.vertices[v]:
                     s.push(next_vertex)
-    def dft_recursive(self, starting_vertex):
+    def dft_recursive(self, starting_vertex, visited):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         This should be done using recursion.
         """
-        pass  # TODO
+        visited.add(starting_vertex)
+        print(starting_vertex)
+
+        for vert in self.vertices[starting_vertex]:
+            if vert not in visited:
+                self.dft_recursive(vert, visited)
+
+        return
+
     def bfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing the shortest path from
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+        queue = Queue()
+        visited = set()
+        previous = {}
+        shortest_path = []
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from

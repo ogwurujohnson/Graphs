@@ -96,6 +96,33 @@ class Graph:
         visited = set()
         previous = {}
         shortest_path = []
+
+        previous[starting_vertex] = None
+        queue.enqueue(starting_vertex)
+
+        while queue.size() > 0:
+            vertex = queue.dequeue()
+
+            if vertex == destination_vertex:
+                while vertex is not None:
+                    shortest_path.insert(0, vertex)
+                    if vertex in previous:
+                        vertex = previous[vertex]
+                break
+        
+            if vertex not in visited:
+                visited.add(vertex)
+
+                for next_vert in self.vertices[vertex]:
+                    # Shortest path is going to be adding it first,
+                    # that's why I make the check. If it exists,
+                    # it exists through a shorter path.
+                    if next_vert not in previous:
+                        previous[next_vert] = vertex
+                    queue.enqueue(next_vert)
+
+        return shortest_path
+
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
